@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PoE Item Price Fetcher</title>
+    <title>PoE Item Overview</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,20 +22,16 @@
         }
 
         #poe-logo {
-            width: 150px;
+            width: 500px;
             margin-bottom: 20px;
         }
 
-        #item-form {
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        label {
+        #item-form label {
             font-size: 1.2em;
+            margin-right: 10px;
         }
 
-        input[type="text"] {
+        #item-form input[type="text"] {
             padding: 10px;
             font-size: 1em;
             border: none;
@@ -46,27 +43,27 @@
         .custom-login-button {
             padding: 10px 20px;
             font-size: 1em;
-            background-color: transparent; /* Make sure the background color doesn't override the image */
-            border: 2px solid #4A2E27; /* Border color */
+            background-color: transparent;
+            border: 2px solid #4A2E27;
             border-radius: 5px;
-            color: #FFF; /* Text color */
+            color: #FFF;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 4px #362823; /* Shadow for 3D effect */
-            text-shadow: 1px 1px 2px #000; /* Slight text shadow for depth */
-            background-image: url('C:/Users/Murat Eker/Desktop/project-folder/login.png'); /* Background image */
-            background-size: cover; /* Cover the entire button */
-            background-position: center; /* Center the image */
+            box-shadow: 0 4px #362823;
+            text-shadow: 1px 1px 2px #000;
+            background-image: url('C:/Users/Murat Eker/Desktop/project-folder/login.png');
+            background-size: cover;
+            background-position: center;
         }
 
         .custom-login-button:hover {
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay on hover */
-            box-shadow: 0 4px #4A2E27; /* Darker shadow on hover */
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px #4A2E27;
         }
 
         .custom-login-button:active {
-            box-shadow: 0 2px #4A2E27; /* Pressed effect */
-            transform: translateY(2px); /* Pressed effect */
+            box-shadow: 0 2px #4A2E27;
+            transform: translateY(2px);
         }
 
         .result {
@@ -74,12 +71,12 @@
             border: 1px solid #555;
             padding: 20px;
             background-color: #2e2e2e;
-            display: block; /* Burada inline-block yerine block kullanarak tam genişlik sağlıyoruz */
-            width: auto; /* Genişliği otomatik olarak ayarlıyoruz */
+            display: block;
+            width: auto;
             text-align: left;
             margin-left: auto;
             margin-right: auto;
-            max-width: 600px; /* Maksimum genişlik ayarlayarak çok büyük ekranlarda estetiği koruyoruz */
+            max-width: 600px;
         }
 
         .result h2 {
@@ -104,20 +101,72 @@
             font-size: 0.9em;
             color: #888;
         }
+
+        /* Yeni eklenen CSS */
+        .side-images {
+            display: flex;
+            align-items: center;
+        }
+
+        .side-images img {
+            width: 100px;
+            height: auto;
+            margin: 0 10px;
+        }
+        /* Mevcut CSS kodu */
+
+        #item-form {
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        /* Yeni eklenen CSS */
+        .side-images {
+            display: flex;
+            justify-content: center; /* Bu, tüm içeriği yatayda ortalayacak */
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .side-images img {
+            width: 100px;
+            height: auto;
+            margin: 0 10px; /* Kenarlık boşlukları */
+        }
+
+        #item-form {
+            margin-bottom: 20px;
+            display: flex; /* Flexbox ile yatayda ortalayacağız */
+            flex-direction: column;
+            align-items: center; /* İçeriği ortalayacak */
+        }
+
+        #item-form label,
+        #item-form input,
+        .custom-login-button {
+            margin: 5px 0; /* İçeriğin dikeyde düzenlenmesi için boşluk */
+        }   
+
     </style>
 </head>
 
 <body>
     <img id="poe-logo" src="https://logos-world.net/wp-content/uploads/2021/10/Path-of-Exile-Logo.png" alt="PoE Logo">
     <h1>PoE Item Price Fetcher</h1>
-    <form id="item-form">
-        <label for="item-name">Enter Item Name: </label>
-        <input type="text" id="item-name" name="item-name" required>
-        <button type="submit" class="custom-login-button">LOG IN</button>
-    </form>
+    <div class="side-images">
+        <img src="https://kboosting.com/img/14839/c/mageblood-500x500.png" alt="Mageblood">
+        <img src="https://www.shopofexile.com/image/thumbnails/items/Buy_Ashes_of_the_Stars_for_PoE-106603-380x380.png" alt="Ashes of the Stars">
+        <form id="item-form">
+            <label for="item-name">Enter Item Name: </label>
+            <input type="text" id="item-name" name="item-name" required>
+            <button type="submit" class="custom-login-button">LOG IN</button>
+        </form>
+        <img src="https://www.poewiki.net/images/1/19/Aegis_Aurora_inventory_icon.png" alt="Aegis Aurora">
+        <img src="https://www.poewiki.net/images/e/ee/Headhunter_inventory_icon.png" alt="Headhunter">
+    </div>
     <div id="result" class="result"></div>
     <footer>
-        Created by Murat Eker, <br>
+        by Murat Eker, <br>
         email: murateker9166@gmail.com, <br>
         Note: This product is in no way affiliated with or endorsed by Grinding Gear Games, poe.ninja and poe.watch.
     </footer>
