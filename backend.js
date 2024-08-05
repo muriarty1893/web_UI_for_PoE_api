@@ -4,7 +4,7 @@ const { NinjaAPI, WatchAPI } = require("poe-api-manager");
 const app = express();
 const port = 3000;
 
-const ninjaAPI = new NinjaAPI("Standard");
+const ninjaAPI = new NinjaAPI("Settlers");
 const requestedProperties = ["id", "name", "divineValue", "explicitModifiers", "icon"];
 
 // Kök URL'de index.html dosyasını sun
