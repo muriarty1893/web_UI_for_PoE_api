@@ -46,7 +46,7 @@
         .custom-login-button {
             padding: 10px 20px;
             font-size: 1em;
-            background-color: #8B4C39; /* Base color */
+            background-color: transparent; /* Make sure the background color doesn't override the image */
             border: 2px solid #4A2E27; /* Border color */
             border-radius: 5px;
             color: #FFF; /* Text color */
@@ -54,13 +54,13 @@
             font-weight: bold;
             box-shadow: 0 4px #362823; /* Shadow for 3D effect */
             text-shadow: 1px 1px 2px #000; /* Slight text shadow for depth */
-            background-image: url('/login.png'); /* Background image */
+            background-image: url('C:/Users/Murat Eker/Desktop/project-folder/login.png'); /* Background image */
             background-size: cover; /* Cover the entire button */
             background-position: center; /* Center the image */
         }
 
         .custom-login-button:hover {
-            background-color: rgba(163, 91, 70, 0.8); /* Lighter background with opacity on hover */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay on hover */
             box-shadow: 0 4px #4A2E27; /* Darker shadow on hover */
         }
 
