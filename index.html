@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,30 +8,121 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
             padding: 20px;
+            text-align: center;
         }
-        #item-form {
+
+        h1 {
+            color: #ff6600;
+            font-size: 2.5em;
             margin-bottom: 20px;
         }
+
+        #poe-logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        #item-form {
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        label {
+            font-size: 1.2em;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: 200px;
+        }
+
+        .custom-login-button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #8B4C39; /* Base color */
+            border: 2px solid #4A2E27; /* Border color */
+            border-radius: 5px;
+            color: #FFF; /* Text color */
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px #362823; /* Shadow for 3D effect */
+            text-shadow: 1px 1px 2px #000; /* Slight text shadow for depth */
+            background-image: url('/login.png'); /* Background image */
+            background-size: cover; /* Cover the entire button */
+            background-position: center; /* Center the image */
+        }
+
+        .custom-login-button:hover {
+            background-color: rgba(163, 91, 70, 0.8); /* Lighter background with opacity on hover */
+            box-shadow: 0 4px #4A2E27; /* Darker shadow on hover */
+        }
+
+        .custom-login-button:active {
+            box-shadow: 0 2px #4A2E27; /* Pressed effect */
+            transform: translateY(2px); /* Pressed effect */
+        }
+
         .result {
             margin-top: 20px;
-            border: 1px solid #ddd;
-            padding: 10px;
+            border: 1px solid #555;
+            padding: 20px;
+            background-color: #2e2e2e;
+            display: block; /* Burada inline-block yerine block kullanarak tam genişlik sağlıyoruz */
+            width: auto; /* Genişliği otomatik olarak ayarlıyoruz */
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 600px; /* Maksimum genişlik ayarlayarak çok büyük ekranlarda estetiği koruyoruz */
+        }
+
+        .result h2 {
+            color: #ff6600;
+        }
+
+        .result p {
+            margin: 5px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #888;
         }
     </style>
 </head>
+
 <body>
+    <img id="poe-logo" src="https://logos-world.net/wp-content/uploads/2021/10/Path-of-Exile-Logo.png" alt="PoE Logo">
     <h1>PoE Item Price Fetcher</h1>
     <form id="item-form">
         <label for="item-name">Enter Item Name: </label>
         <input type="text" id="item-name" name="item-name" required>
-        <button type="submit">Fetch Price</button>
+        <button type="submit" class="custom-login-button">LOG IN</button>
     </form>
-
     <div id="result" class="result"></div>
-
+    <footer>
+        Created by Murat Eker, <br>
+        email: murateker9166@gmail.com, <br>
+        Note: This product is in no way affiliated with or endorsed by Grinding Gear Games, poe.ninja and poe.watch.
+    </footer>
     <script>
-        document.getElementById('item-form').addEventListener('submit', function(event) {
+        document.getElementById('item-form').addEventListener('submit', function (event) {
             event.preventDefault();
             const itemName = document.getElementById('item-name').value;
 
@@ -40,7 +132,6 @@
                     const resultDiv = document.getElementById('result');
                     if (data.success) {
                         const modifiers = data.data.explicitModifiers.map(mod => mod.text || JSON.stringify(mod)).join('</li><li>');
-                        
                         resultDiv.innerHTML = `
                             <h2>Item: ${data.data.name}</h2>
                             <p><strong>Divine Value:</strong> ${data.data.divineValue}</p>
@@ -58,7 +149,7 @@
                     document.getElementById('result').innerHTML = `<p>Error: ${error.message}</p>`;
                 });
         });
-
     </script>
 </body>
+
 </html>
