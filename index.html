@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoE Item Price Fetcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #item-form {
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PoE Item Price Fetcher</h1>
+    <form id="item-form">
+        <label for="item-name">Enter Item Name: </label>
+        <input type="text" id="item-name" name="item-name" required>
+        <button type="submit">Fetch Price</button>
+    </form>
+
+    <div id="result" class="result"></div>
+
+    <script>
+        document.getElementById('item-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const itemName = document.getElementById('item-name').value;
+
+            fetch(`/fetch-item-price?iname=${itemName}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultDiv = document.getElementById('result');
+                    if (data.success) {
+                        const modifiers = data.data.explicitModifiers.map(mod => mod.text || JSON.stringify(mod)).join('</li><li>');
+                        
+                        resultDiv.innerHTML = `
+                            <h2>Item: ${data.data.name}</h2>
+                            <p><strong>Divine Value:</strong> ${data.data.divineValue}</p>
+                            <p><strong>Explicit Modifiers:</strong></p>
+                            <ul>
+                                <li>${modifiers}</li>
+                            </ul>
+                            <img src="${data.data.icon}" alt="${data.data.name}">
+                        `;
+                    } else {
+                        resultDiv.innerHTML = `<p>${data.message}</p>`;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('result').innerHTML = `<p>Error: ${error.message}</p>`;
+                });
+        });
+
+    </script>
+</body>
+</html>
