@@ -166,6 +166,35 @@
         a:visited {
             color: purple; /* Ziyaret edildikten sonra rengin mor olması */
         }
+        #search-history {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+        #search-history h2 {
+            margin-top: 0;
+        }
+
+        #history-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        #history-list li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #444;
+            border-radius: 5px;
+        }
+
 
     </style>
 </head>
@@ -196,7 +225,7 @@
         document.getElementById('item-form').addEventListener('submit', function (event) {
             event.preventDefault();
             const itemName = document.getElementById('item-name').value;
-
+    
             fetch(`/fetch-item-price?iname=${itemName}`)
                 .then(response => response.json())
                 .then(data => {
@@ -212,6 +241,9 @@
                             </ul>
                             <img src="${data.data.icon}" alt="${data.data.name}">
                         `;
+    
+                        // Arama geçmişine ekleyin
+                        addToHistory(data.data.name, data.data.icon, data.data.divineValue, data.data.explicitModifiers);
                     } else {
                         resultDiv.innerHTML = `<p>${data.message}</p>`;
                     }
@@ -220,7 +252,24 @@
                     document.getElementById('result').innerHTML = `<p>Error: ${error.message}</p>`;
                 });
         });
+    
+        function addToHistory(itemName, itemIcon, itemDiv, itemMods) {
+            const historyList = document.getElementById('history-list');
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <img src="${itemIcon}" alt="${itemName}" style="width: 20px; height: 20px; margin-right: 10px;">
+                ${itemName}
+                ${itemDiv}
+            `;
+            historyList.appendChild(listItem);
+        }
     </script>
+    
+    <div id="search-history">
+        <h2>Search History</h2>
+        <ul id="history-list"></ul>
+    </div>
+    
 </body>
 
 </html>
