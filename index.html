@@ -145,23 +145,45 @@
         #item-form input,
         .custom-login-button {
             margin: 5px 0; /* İçeriğin dikeyde düzenlenmesi için boşluk */
-        }   
+        }
+        a {
+            color: #0baf1b;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        /* Üzerine gelindiğinde (hover) */
+        a:hover {
+            color: green; /* Üzerine gelindiğinde rengin yeşil olması */
+        }
+
+        /* Tıklandığında (active) */
+        a:active {
+            color: red; /* Tıklandığında rengin kırmızı olması */
+        }
+
+        /* Ziyaret edildikten sonra (visited) */
+        a:visited {
+            color: purple; /* Ziyaret edildikten sonra rengin mor olması */
+        }
 
     </style>
 </head>
 
 <body>
     <img id="poe-logo" src="https://logos-world.net/wp-content/uploads/2021/10/Path-of-Exile-Logo.png" alt="PoE Logo">
+    <br>
+    <a href="https://github.com/ayberkgezer/poe-api-manager">api github repo link</a>
     <h1>PoE Item Price Fetcher</h1>
     <div class="side-images">
-        <img src="https://kboosting.com/img/14839/c/mageblood-500x500.png" alt="Mageblood">
-        <img src="https://www.shopofexile.com/image/thumbnails/items/Buy_Ashes_of_the_Stars_for_PoE-106603-380x380.png" alt="Ashes of the Stars">
-        <form id="item-form">
-            <label for="item-name">Enter Item Name: </label>
+        <img src="https://www.poewiki.net/images/thumb/9/90/Original_Sin_inventory_icon.png/78px-Original_Sin_inventory_icon.png" alt="Original Sin">
+        <img src="https://www.poewiki.net/images/c/c0/Mageblood_inventory_icon.png?20211204080822" alt="Mageblood" style="width: 120px; height:60px;">
+                <form id="item-form">
+            <label for="item-name">Enter Item Name Here: </label>
             <input type="text" id="item-name" name="item-name" required>
             <button type="submit" class="custom-login-button">LOG IN</button>
         </form>
-        <img src="https://www.poewiki.net/images/1/19/Aegis_Aurora_inventory_icon.png" alt="Aegis Aurora">
+        <img src="https://www.poewiki.net/images/thumb/4/4e/Ashes_of_the_Stars_inventory_icon.png/78px-Ashes_of_the_Stars_inventory_icon.png" alt="Ashes of the Stars" style="width: 100px; height: 100px;">
         <img src="https://www.poewiki.net/images/e/ee/Headhunter_inventory_icon.png" alt="Headhunter">
     </div>
     <div id="result" class="result"></div>
