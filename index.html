@@ -194,6 +194,16 @@
             background: #cac6c6;
             margin: 20px 0;
         }
+        
+        #chaos-orb-value {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #444;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
     </style>
 </head>
@@ -219,6 +229,7 @@
         email: murateker9166@gmail.com, <br>
         Note: This product is in no way affiliated with or endorsed by Grinding Gear Games, poe.ninja and poe.watch.
     </footer>
+    <div id="chaos-orb-value">Loading Chaos Orb value...</div>
     <script>
         document.getElementById('item-form').addEventListener('submit', function (event) {
             event.preventDefault();
@@ -260,6 +271,21 @@
             `;
             historyList.appendChild(listItem);
         }
+        async function fetchChaosOrbValue() {
+            try {
+                const response = await fetch('/fetch-chaos-value');
+                const data = await response.json();
+                if (data.success) {
+                    document.getElementById('chaos-orb-value').textContent = `1 Divine Orb = ${data.chaosValue} Chaos Orbs`;
+                } else {
+                    document.getElementById('chaos-orb-value').textContent = 'Failed to load Chaos Orb value';
+                }
+            } catch (error) {
+                document.getElementById('chaos-orb-value').textContent = `Error: ${error.message}`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchChaosOrbValue);
     </script>
     
     <div id="search-history">
