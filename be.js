@@ -35,7 +35,8 @@ app.get("/fetch-item-price", async (req, res) => {
 
 app.get("/fetch-chaos-value", async (req, res) => {
     try {
-        const chaosValue = await ninjaAPI.currencyView.currency.getQuickCurrency("Divine Orb");
+        const chaosValueData = await ninjaAPI.currencyView.currency.getQuickCurrency("Divine Orb");
+        const chaosValue = chaosValueData.chaosEquivalent;
         res.json({ success: true, chaosValue });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
