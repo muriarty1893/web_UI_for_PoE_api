@@ -9,7 +9,13 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #1e1e1e;
+            background-color: transparent;
+            background-image: url('https://e1.pxfuel.com/desktop-wallpaper/727/517/desktop-wallpaper-forum-earth-quake-discrustion.jpg');
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+            background-attachment: fixed;  
+            background-repeat: no-repeat; 
             color: #d4d4d4;
             padding: 20px;
             text-align: center;
@@ -146,6 +152,9 @@
             font-size: 2.5em;
             margin-bottom: 20px;
             text-decoration: none;
+            background: #000;
+            background-color: #9fd4e1;
+            background-size: auto;
         }
 
         a:hover {
@@ -204,7 +213,16 @@
             padding: 10px;
             border-radius: 5px;
         }
-
+        
+        #league-name {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            background-color: #444;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -230,6 +248,7 @@
         Note: This product is in no way affiliated with or endorsed by Grinding Gear Games, poe.ninja and poe.watch.
     </footer>
     <div id="chaos-orb-value">Loading Chaos Orb value...</div>
+    <div id="league-name">Settlers</div>
     <script>
         document.getElementById('item-form').addEventListener('submit', function (event) {
             event.preventDefault();
@@ -288,6 +307,7 @@
                 const data = await response.json();
                 if (data.success) {
                     document.getElementById('chaos-orb-value').textContent = `1 Divine Orb = ${data.chaosValue} Chaos Orbs`;
+                    document.getElementById('league-name').textContent = `Current League: Settlers`;
                 } else {
                     document.getElementById('chaos-orb-value').textContent = 'Failed to load Chaos Orb value';
                 }
