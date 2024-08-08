@@ -241,16 +241,27 @@
                     const resultDiv = document.getElementById('result');
                     if (data.success) {
                         const modifiers = data.data.explicitModifiers.map(mod => mod.text || JSON.stringify(mod)).join('</li><li>');
-                        resultDiv.innerHTML = `
-                            <h2>Item: ${data.data.name}</h2>
-                            <p><strong>Divine Value:</strong> ${data.data.divineValue}</p>
-                            <p><strong>Explicit Modifiers:</strong></p>
-                            <ul>
-                                <li>${modifiers}</li>
-                            </ul>
-                            <img src="${data.data.icon}" alt="${data.data.name}">
-                        `;
-    
+                        if(data.data.divineValue>=1){
+                            resultDiv.innerHTML = `
+                                <h2>Item: ${data.data.name}</h2>
+                                <p><strong>Divine Value:</strong> ${data.data.divineValue}</p>
+                                <p><strong>Explicit Modifiers:</strong></p>
+                                <ul>
+                                    <li>${modifiers}</li>
+                                </ul>
+                                <img src="${data.data.icon}" alt="${data.data.name}">
+                            `;
+                        } else {
+                            resultDiv.innerHTML = `
+                                <h2>Item: ${data.data.name}</h2>
+                                <p><strong>Chaos Value:</strong> ${data.data.chaosValue}</p>
+                                <p><strong>Explicit Modifiers:</strong></p>
+                                <ul>
+                                    <li>${modifiers}</li>
+                                </ul>
+                                <img src="${data.data.icon}" alt="${data.data.name}">
+                            `;
+                        }            
                         addToHistory(data.data.name, data.data.icon, data.data.divineValue, data.data.explicitModifiers);
                     } else {
                         resultDiv.innerHTML = `<p>${data.message}</p>`;
