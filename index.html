@@ -308,7 +308,9 @@
         async function fetchChaosOrbValue() {
             try {
                 const response = await fetch('/fetch-chaos-value');
+                
                 const data = await response.json();
+               
                 if (data.success) {
                     document.getElementById('chaos-orb-value').textContent = `1 Divine Orb = ${data.chaosValue} Chaos Orbs`;
                     document.getElementById('league-name').textContent = `Current League: Settlers`;
