@@ -24,14 +24,12 @@ app.get("/fetch-item-price", async (req, res) => {
     const iname = req.query.iname.toLowerCase().trim(); 
 
     try {
-        // Tüm itemleri aramak için aşağıdaki item kategorilerini ekledik
         const itemTypes = [
             ninjaAPI.itemView.uniqueAccessory,
             ninjaAPI.itemView.uniqueArmour,
             ninjaAPI.itemView.uniqueFlask,
             ninjaAPI.itemView.uniqueJewel,
-            ninjaAPI.itemView.uniqueWeapon,
-            // Diğer item kategorilerini de ekleyebilirsin
+            ninjaAPI.itemView.uniqueWeapon,  
         ];
 
         let itemOut = null;
