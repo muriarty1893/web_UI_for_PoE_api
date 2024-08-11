@@ -56,6 +56,51 @@ app.get("/fetch-item-price", async (req, res) => {
     }
 });
 
+app.get("/collect-data", async (req, res) => {
+    try {
+        const itemTypes = [
+            ninjaAPI.itemView.uniqueAccessory,
+            ninjaAPI.itemView.uniqueArmour,
+            ninjaAPI.itemView.uniqueFlask,
+            ninjaAPI.itemView.uniqueJewel,
+            ninjaAPI.itemView.uniqueWeapon,
+        ];
+
+        let allItems = [];
+
+        for (const itemType of itemTypes) {
+            const items = await itemType.getData([
+                "id", "name", "divineValue", "chaosValue", "explicitModifiers", "icon"
+            ]);
+
+            // explicitModifiers'ı metne dönüştür
+            items.forEach(item => {
+                item.explicitModifiers = item.explicitModifiers
+                    .map(mod => `${mod.text} (${mod.optionalStat || ''})`)
+                    .join(", ");
+            });
+
+            allItems = allItems.concat(items);
+        }
+
+        // Veri setini kaydetme işlemi - örneğin CSV formatında
+        const csvWriter = require("csv-writer").createObjectCsvWriter({
+            path: "poe_item_data.csv",
+            header: [
+                { id: "name", title: "NAME" },
+                { id: "divineValue", title: "DIVINE VALUE" },
+                { id: "chaosValue", title: "CHAOS VALUE" },
+                { id: "explicitModifiers", title: "EXPLICIT MODIFIERS" },
+            ],
+        });
+
+        await csvWriter.writeRecords(allItems);
+
+        res.json({ success: true, message: "Veri başarıyla toplandı ve kaydedildi." });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
 
 
 app.listen(port, () => {
